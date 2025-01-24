@@ -50,3 +50,23 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
+
+// Function to remove a task from Local Storage
+function removeTaskFromStorage(taskText) {
+  const storedTasks = JSON.parse(localStorage.getItem("tasks") || "[]");
+  const updatedTasks = storedTasks.filter((task) => task !== taskText);
+  localStorage.setItem("tasks", JSON.stringify(updatedTasks));
+}
+
+// Add event listener to the "Add Task" button
+addButton.addEventListener("click", () => addTask(taskInput.value));
+
+// Add event listener for pressing "Enter" in the input field
+taskInput.addEventListener("keypress", (event) => {
+  if (event.key === "Enter") {
+    addTask(taskInput.value);
+  }
+});
+
+// Load existing tasks from Local Storage
+loadTasks();
